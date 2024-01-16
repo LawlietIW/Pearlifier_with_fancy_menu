@@ -14,7 +14,7 @@ def upscale_and_add_grid(original_image, width, height, pixel_scaling, thick_lin
     # Create a new image with the expanded size after upscaling
     new_width = width * pixel_scaling + (width - 1) + thick_line_extra_width # New width after upscaling and adding gaps
     new_height = height * pixel_scaling + (height - 1)  + thick_line_extra_height  # New height after upscaling and adding gaps
-    new_image = Image.new("RGB", (new_width, new_height), color="black")
+    new_image = Image.new("RGB", (new_width, new_height), color=(0,0,1))  # The new image is initially filled with the line color pixels
 
     # Iterate through each pixel in the original image
     for x in tqdm(range(width)):

@@ -54,6 +54,7 @@ def get_colors(color_names, color_map):
 
 
 color_map = {
+    "Line Color": (0, 0, 1),
     "White": (236, 237, 237),
     "Cream": (240, 232, 185),
     "Yellow": (240, 185, 1),
@@ -104,6 +105,7 @@ color_map = {
 
 
 inverted_color_map = {
+    (0,0,1): "Line Color",
     (236, 237, 237): "White",
     (240, 232, 185): "Cream",
     (240, 185, 1): "Yellow",
