@@ -186,6 +186,8 @@ class PixelColorChanger:
         target_color = pixels[x, y]  #Color already there
         if target_color == (0,0,1): 
             return # Don't replace the line color
+        if target_color == self.color_map[selected_color]:
+            return # Don't replace the same color
         stack = [(x, y)]
         print("target_color", target_color)
         print("selected_color", selected_color)
@@ -234,6 +236,8 @@ class PixelColorChanger:
     def on_button_hold(self, event):
         if self.mouse_pressed:
             self.on_click(event)
+            # Call the on_click method repeatedly while the mouse button is held
+            self.root.after(10, self.on_button_hold, event)
 
     def on_button_release(self, event):
         self.mouse_pressed = False
