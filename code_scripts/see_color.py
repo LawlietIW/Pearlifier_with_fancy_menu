@@ -42,5 +42,5 @@ def see_colors_used(sorted_color_counts, color_map):
         y_position += 30
 
     # Save the image or display it
-    image.save("sorted_color_palette.png")
+    image.save("color_palettes/sorted_color_palette.png")
     image.show()
