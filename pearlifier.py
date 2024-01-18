@@ -5,6 +5,7 @@ from code_scripts.hsl_pearl import resize_image as hsl_reformer
 from code_scripts.add_grid import upscale_and_add_grid
 import os
 
+
 def get_colors(color_names, color_map):
     """Returns a list of RGB colors corresponding to the color names"""
     result = []

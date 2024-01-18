@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk, colorchooser
 from tkinter import messagebox
 
-color_map = {
+colors = {
     "White": (236, 237, 237),
     "Cream": (240, 232, 185),
     "Yellow": (240, 185, 1),
