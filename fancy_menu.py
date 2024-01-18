@@ -333,7 +333,7 @@ class ModernMenuApp(App):
 
             if grid > 1:
                 thick_line = grid
-                new_image = upscale_and_add_grid(new_image, width, height, pixel_scaling=10, thick_line=thick_line)
+                new_image = upscale_and_add_grid(new_image, width, height, pixel_scaling=5, thick_line=thick_line)
                 output_image_path = "pearl_images/grid_" + filename + ".png"
 
             transformed_dict = {inverted_color_map[key]: value for key, value in colors_used.items()}
