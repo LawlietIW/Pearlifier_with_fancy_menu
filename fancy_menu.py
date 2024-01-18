@@ -273,7 +273,7 @@ class ModernMenuApp(App):
 
     def on_colors_selected(self, selected_colors):
         self.selected_colors = selected_colors
-        print(f"Selected Colors: {selected_colors}")
+        # print(f"Selected Colors: {selected_colors}")
 
     def return_to_original_menu(self):
         self.root = self.original_menu_layout
@@ -301,7 +301,7 @@ class ModernMenuApp(App):
         
         self.selected_file_path = os.path.relpath(value[0])
 
-        print(f"Selected file: {self.selected_file_path}")
+        # print(f"Selected file: {self.selected_file_path}")
 
         # Check if the file has an allowed extension
         allowed_extensions = ['.png', '.jpg', '.jpeg']

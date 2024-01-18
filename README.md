@@ -1,6 +1,11 @@
 # Pearlifier
 Run the fancy_menu.py to start
 
+pip install kivy
+pip install pillow
+
+Then pick a file, choose the colours, pick width height and grid. If 1 or 0 you get no grid. Else you get a grid with thick line as often as you say. Then pearlify!!!!!!!
+
 ## Features
 ### Choose Image:
 Allows users to select an image file (PNG, JPG, JPEG) from their system.

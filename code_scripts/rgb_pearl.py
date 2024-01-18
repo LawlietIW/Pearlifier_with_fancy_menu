@@ -39,9 +39,6 @@ def resize_image(input_image_path, output_image_path, new_width, new_height, ava
     # Open the input image
     original_image = Image.open(input_image_path)
     original_image = original_image.convert('RGB')
-    print("path", input_image_path)
-    print(new_width, new_height)
-    print(available_colors)
     # Resize the image
     
     resized_image = original_image.resize((new_width, new_height))
