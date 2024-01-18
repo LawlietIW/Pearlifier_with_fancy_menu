@@ -2,6 +2,105 @@ import tkinter as tk
 from tkinter import filedialog
 from PIL import Image, ImageTk
 
+
+color_map = {
+    "Black": (46, 47, 49),
+    "Dark Blue (Blue)": (44, 70, 144),
+    "Dark Red": (165, 45, 54),
+    "Brown": (83, 65, 55),
+    "Reddish Brown": (127, 51, 42),
+    "Grey": (131, 136, 138),
+    "Clear": (216, 210, 206),
+    "White": (236, 237, 237),
+    "Cream": (240, 232, 185),
+    "Light Brown": (165, 105, 63),
+    "Yellow": (240, 185, 1),
+    "Orange": (230, 79, 39),
+    "Transparent Red": (192, 36, 53),
+    "Transparent Green": (55, 184, 118),
+    "Green": (37, 104, 71),
+    "Light green": (73, 174, 137),
+    "Army (Dark Green)": (54, 63, 56),
+    "Turquoise": (103, 151, 174),
+    "Pastel Green": (131, 203, 112),
+    "Pastel Yellow": (240, 234, 55),
+    "Fluorescent Green": (12, 189, 81),
+    "Neon Green": (6, 183, 60),
+    "Light Blue": (48, 92, 176),
+    "Azure": (73, 152, 188),
+    "Pastel Blue": (98, 158, 215),
+    "Neon Blue": (35, 83, 176),
+    "Pastel Purple": (136, 109, 185),
+    "Translucent Purple": (104, 62, 154),
+    "Purple": (105, 74, 130),
+    "Pink": (225, 136, 159),
+    "Pastel Pink": (207, 112, 183),
+    "Neon Pink (Fucsia)": (255, 32, 141),
+    "Cerise": (255, 57, 86),
+    "Burgundy": (89, 47, 56),
+    "Claret": (185, 57, 94),
+    "Red": (182, 49, 54),
+    "Fluorescent Yellow": (241, 242, 28),
+    "Neon Yellow": (229, 239, 19),
+    "Pastel Red": (238, 105, 114),
+    "Neon Red": (255, 40, 51),
+    "Flesh": (222, 155, 144),
+    "Beige": (222, 180, 139),
+    "Translucent Brown": (135, 89, 61),
+}
+
+
+
+
+inverted_color_map = {
+    (46, 47, 49): "Black",
+    (44, 70, 144): "Dark Blue (Blue)",
+    (165, 45, 54): "Dark Red",
+    (83, 65, 55): "Brown",
+    (127, 51, 42): "Reddish Brown",
+    (131, 136, 138): "Grey",
+    (216, 210, 206): "Clear",
+    (236, 237, 237): "White",
+    (240, 232, 185): "Cream",
+    (165, 105, 63): "Light Brown",
+    (240, 185, 1): "Yellow",
+    (230, 79, 39): "Orange",
+    (192, 36, 53): "Transparent Red",
+    (55, 184, 118): "Transparent Green",
+    (37, 104, 71): "Green",
+    (73, 174, 137): "Light green",
+    (54, 63, 56): "Army (Dark Green)",
+    (103, 151, 174): "Turquoise",
+    (131, 203, 112): "Pastel Green",
+    (240, 234, 55): "Pastel Yellow",
+    (12, 189, 81): "Fluorescent Green",
+    (6, 183, 60): "Neon Green",
+    (48, 92, 176): "Light Blue",
+    (73, 152, 188): "Azure",
+    (98, 158, 215): "Pastel Blue",
+    (35, 83, 176): "Neon Blue",
+    (136, 109, 185): "Pastel Purple",
+    (104, 62, 154): "Translucent Purple",
+    (105, 74, 130): "Purple",
+    (225, 136, 159): "Pink",
+    (207, 112, 183): "Pastel Pink",
+    (255, 32, 141): "Neon Pink (Fucsia)",
+    (255, 57, 86): "Cerise",
+    (89, 47, 56): "Burgundy",
+    (185, 57, 94): "Claret",
+    (182, 49, 54): "Red",
+    (241, 242, 28): "Fluorescent Yellow",
+    (229, 239, 19): "Neon Yellow",
+    (238, 105, 114): "Pastel Red",
+    (255, 40, 51): "Neon Red",
+    (222, 155, 144): "Flesh",
+    (222, 180, 139): "Beige",
+    (135, 89, 61): "Translucent Brown",
+}
+
+
+
+
 class PixelColorChanger:
     def __init__(self, root):
         self.root = root
@@ -23,19 +122,113 @@ class PixelColorChanger:
         self.selected_pixel_label = tk.Label(self.root, text="Selected Pixel: None")
         self.selected_pixel_label.pack()
 
-        self.color_map = {
-            "White": (236, 237, 237),
-            "Cream": (240, 232, 185),
-            "Azure": (73, 152, 188),
-        }
+        # self.color_map = {
+        #     "White": (236, 237, 237),
+        #     "Cream": (240, 232, 185),
+        #     "Yellow": (240, 185, 1),
+        #     "Orange": (230, 79, 39),
+        #     "Red": (182, 49, 54),
+        #     "Pink": (225, 136, 159),
+        #     "Purple": (105, 74, 130),
+        #     "Dark Blue (Blue)": (44, 70, 144),
+        #     "Light Blue": (48, 92, 176),
+        #     "Green": (37, 104, 71),
+        #     "Light green": (73, 174, 137),
+        #     "Brown": (83, 65, 55),
+        #     "Transparent Red": (192, 36, 53),
+        #     "Transparent Green": (55, 184, 118),
+        #     "Grey": (131, 136, 138),
+        #     "Black": (46, 47, 49),
+        #     "Clear": (216, 210, 206),
+        #     "Reddish Brown": (127, 51, 42),
+        #     "Light Brown": (165, 105, 63),
+        #     "Dark Red": (165, 45, 54),
+        #     "Translucent Purple": (104, 62, 154),
+        #     "Translucent Brown": (135, 89, 61),
+        #     "Flesh": (222, 155, 144),
+        #     "Beige": (222, 180, 139),
+        #     "Army (Dark Green)": (54, 63, 56),
+        #     "Claret": (185, 57, 94),
+        #     "Burgundy": (89, 47, 56),
+        #     "Turquoise": (103, 151, 174),
+        #     "Neon Pink (Fucsia)": (255, 32, 141),
+        #     "Cerise": (255, 57, 86),
+        #     "Neon Yellow": (229, 239, 19),
+        #     "Neon Red": (255, 40, 51),
+        #     "Neon Blue": (35, 83, 176),
+        #     "Neon Green": (6, 183, 60),
+        #     "Neon Orange": (253, 134, 0),
+        #     "Fluorescent Yellow": (241, 242, 28),
+        #     "Fluorescent Orange": (254, 99, 11),
+        #     "Fluorescent Blue": (38, 89, 178),
+        #     "Fluorescent Green": (12, 189, 81),
+        #     "Pastel Yellow": (240, 234, 55),
+        #     "Pastel Red": (238, 105, 114),
+        #     "Pastel Purple": (136, 109, 185),
+        #     "Pastel Blue": (98, 158, 215),
+        #     "Pastel Green": (131, 203, 112),
+        #     "Pastel Pink": (207, 112, 183),
+        #     "Azure": (73, 152, 188),
+        # }
 
+        self.inverted_color_map = {
+            (236, 237, 237): "White",
+            (240, 232, 185): "Cream",
+            (240, 185, 1): "Yellow",
+            (230, 79, 39): "Orange",
+            (182, 49, 54): "Red",
+            (225, 136, 159): "Pink",
+            (105, 74, 130): "Purple",
+            (44, 70, 144): "Dark Blue (Blue)",
+            (48, 92, 176): "Light Blue",
+            (37, 104, 71): "Green",
+            (73, 174, 137): "Light green",
+            (83, 65, 55): "Brown",
+            (192, 36, 53): "Transparent Red",
+            (55, 184, 118): "Transparent Green",
+            (131, 136, 138): "Grey",
+            (46, 47, 49): "Black",
+            (216, 210, 206): "Clear",
+            (127, 51, 42): "Reddish Brown",
+            (165, 105, 63): "Light Brown",
+            (165, 45, 54): "Dark Red",
+            (104, 62, 154): "Translucent Purple",
+            (135, 89, 61): "Translucent Brown",
+            (222, 155, 144): "Flesh",
+            (222, 180, 139): "Beige",
+            (54, 63, 56): "Army (Dark Green)",
+            (185, 57, 94): "Claret",
+            (89, 47, 56): "Burgundy",
+            (103, 151, 174): "Turquoise",
+            (255, 32, 141): "Neon Pink (Fucsia)",
+            (255, 57, 86): "Cerise",
+            (229, 239, 19): "Neon Yellow",
+            (255, 40, 51): "Neon Red",
+            (35, 83, 176): "Neon Blue",
+            (6, 183, 60): "Neon Green",
+            (253, 134, 0): "Neon Orange",
+            (241, 242, 28): "Fluorescent Yellow",
+            (254, 99, 11): "Fluorescent Orange",
+            (38, 89, 178): "Fluorescent Blue",
+            (12, 189, 81): "Fluorescent Green",
+            (240, 234, 55): "Pastel Yellow",
+            (238, 105, 114): "Pastel Red",
+            (136, 109, 185): "Pastel Purple",
+            (98, 158, 215): "Pastel Blue",
+            (131, 203, 112): "Pastel Green",
+            (207, 112, 183): "Pastel Pink",
+            (73, 152, 188): "Azure",
+        }
         self.color_menu_frame = tk.Frame(self.root)
         self.color_menu_frame.pack(side=tk.RIGHT, fill=tk.Y)
 
-        self.color_menu = tk.Listbox(self.color_menu_frame, selectmode=tk.SINGLE, height=len(self.color_map))
-        for color in self.color_map:
+        self.color_menu = tk.Listbox(self.color_menu_frame, selectmode=tk.SINGLE, height=len(color_map))
+        for color in color_map:
             self.color_menu.insert(tk.END, color)
         self.color_menu.pack()
+
+        for i, color in enumerate(color_map):
+            self.color_menu.itemconfig(i, {'bg': f'#{self.rgb_to_hex(color_map[color])}'})
 
         menu_bar = tk.Menu(root)
         root.config(menu=menu_bar)
@@ -70,7 +263,7 @@ class PixelColorChanger:
 
         selected_color_index = self.color_menu.curselection()
         if selected_color_index:
-            selected_color = list(self.color_map.keys())[selected_color_index[0]]
+            selected_color = list(color_map.keys())[selected_color_index[0]]
 
             pixels = self.image.load()
 
@@ -86,8 +279,15 @@ class PixelColorChanger:
 
 
     def replace_color_around_position(self, pixels, x, y, selected_color):
-        target_color = pixels[x, y]
+        # print("sel", selected_color)
+        target_color = pixels[x, y]  #Color already there
+        if target_color == (0,0,1): 
+            return # Don't replace the line color
+        if target_color == color_map[selected_color]:
+            return # Don't replace the same color
         stack = [(x, y)]
+        print("target_color", target_color)
+        print("selected_color", selected_color)
 
         while stack:
             current_x, current_y = stack.pop()
@@ -97,7 +297,7 @@ class PixelColorChanger:
                 # Check if the pixel has the target color
                 if pixels[current_x, current_y] == target_color:
                     # Replace the color
-                    pixels[current_x, current_y] = self.color_map[selected_color]
+                    pixels[current_x, current_y] = color_map[selected_color]
 
                     # Add neighboring pixels to the stack
                     stack.append((current_x - 1, current_y))
@@ -115,7 +315,8 @@ class PixelColorChanger:
             pixels = self.image.load()
 
             # Restore the previous color
-            pixels[x, y] = prev_color
+            selected_color = self.inverted_color_map[prev_color]
+            self.replace_color_around_position(pixels, x, y, selected_color)
 
             self.tk_image = ImageTk.PhotoImage(self.image)
             self.canvas.delete("all")
@@ -132,6 +333,8 @@ class PixelColorChanger:
     def on_button_hold(self, event):
         if self.mouse_pressed:
             self.on_click(event)
+            # Call the on_click method repeatedly while the mouse button is held
+            self.root.after(10, self.on_button_hold, event)
 
     def on_button_release(self, event):
         self.mouse_pressed = False
@@ -141,6 +344,9 @@ class PixelColorChanger:
             file_path = filedialog.asksaveasfilename(defaultextension=".png", filetypes=[("PNG files", "*.png")])
             if file_path:
                 self.image.save(file_path)
+
+    def rgb_to_hex(self, rgb):
+        return f'{rgb[0]:02X}{rgb[1]:02X}{rgb[2]:02X}'
 
 if __name__ == "__main__":
     root = tk.Tk()

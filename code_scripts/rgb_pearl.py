@@ -39,13 +39,9 @@ def resize_image(input_image_path, output_image_path, new_width, new_height, ava
     # Open the input image
     original_image = Image.open(input_image_path)
     original_image = original_image.convert('RGB')
-    # Use ColorThief to get the dominant color of the input image
-    # color_thief = ColorThief(input_image_path)
-    # dominant_color = color_thief.get_color(quality=1)
-
-    # # Find the closest available color to the dominant color
-    # closest_color = get_closest_color(dominant_color, available_colors)
-
+    print("path", input_image_path)
+    print(new_width, new_height)
+    print(available_colors)
     # Resize the image
     
     resized_image = original_image.resize((new_width, new_height))
@@ -56,7 +52,7 @@ def resize_image(input_image_path, output_image_path, new_width, new_height, ava
     colors_used = {}
     # Iterate over each pixel in the resized image
     # print("HAHAHAHA")
-    for x in tqdm(range(new_width)):
+    for x in range(new_width):
         for y in range(new_height):
             # Get the pixel color at the current position
             pixel_color = resized_image.getpixel((x, y))
