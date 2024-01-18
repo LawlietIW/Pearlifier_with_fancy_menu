@@ -352,7 +352,7 @@ class ModernMenuApp(App):
 
 
     def edit_button_pressed(self):
-        subprocess.Popen(['python', 'edit_png.py'])
+        subprocess.Popen(['python', 'code_scripts/edit_png.py'])
 
 
 if __name__ == '__main__':

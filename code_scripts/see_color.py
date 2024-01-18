@@ -16,7 +16,7 @@ def create_color_image(color_map):
         y_position += 30
 
     # Save the image or display it
-    image.save("color_palette.png")
+    image.save("color_palettes/color_palette.png")
     image.show()
 
 # Example usage
