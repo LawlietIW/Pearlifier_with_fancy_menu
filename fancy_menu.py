@@ -136,14 +136,14 @@ class ColorSelectionWindow(BoxLayout):
         self.original_menu_callback = original_menu_callback
         self.selected_colors = set()
 
-
+        self.zero_to_one_color_map = {}
         for color_name, rgb_tuple in color_map.items():
-            color_map[color_name] = tuple(val / 255.0 for val in rgb_tuple) + (1.0,)
+            self.zero_to_one_color_map[color_name] = tuple(val / 255.0 for val in rgb_tuple) + (1.0,)
 
         grid_layout = GridLayout(cols=10, rows = 6, spacing=10, size_hint_y=0.8)  # Adjust size_hint_y value
         self.color_buttons = {}  # Dictionary to store color buttons
 
-        for color_name, color_value in color_map.items():
+        for color_name, color_value in self.zero_to_one_color_map.items():
             color_button = Button(background_normal='', background_color=color_value, size_hint=(None, None), size=(50, 50))
             color_button.bind(on_release=self.toggle_color)
             self.color_buttons[color_value] = color_button
@@ -175,7 +175,7 @@ class ColorSelectionWindow(BoxLayout):
             self.selected_colors_layout.add_widget(selected_color_button)
 
     def get_color_name(self, color):
-        for name, value in color_map.items():
+        for name, value in self.zero_to_one_color_map.items():
             if value == color:
                 return name
         return 'Unknown'
