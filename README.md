@@ -1,5 +1,5 @@
-# Modern Menu App
-The Modern Menu App is a Python application built using the Kivy framework. This app provides a modern and user-friendly interface for performing various image processing tasks.
+# Pearlifier
+Run the fancy_menu.py to start
 
 ## Features
 ### Choose Image:
