@@ -13,7 +13,7 @@ from threading import Thread
 # from edit_png import PixelColorChanger
 import subprocess
 
-from code_scripts.see_color import create_color_image, see_colors_used
+from code_scripts.see_color import see_colors_used
 from code_scripts.hsv_pearl import resize_image as hsv_reformer
 from code_scripts.rgb_pearl import resize_image as rgb_reformer
 from code_scripts.hsl_pearl import resize_image as hsl_reformer
@@ -65,7 +65,30 @@ color_map = {
     "Flesh": (222, 155, 144),
     "Beige": (222, 180, 139),
     "Translucent Brown": (135, 89, 61),
+    # Fancy colors
+    "Teal": (0, 128, 128),
+    "Magenta": (255, 0, 255),
+    "Gold": (255, 215, 0),
+    "Lavender": (230, 230, 250),
+    "Aqua": (0, 255, 255),
+    "Cyan": (0, 255, 255),
+    "Olive": (128, 128, 0),
+    "Maroon": (128, 0, 0),
+    "Indigo": (75, 0, 130),
+    "Violet": (238, 130, 238),
+    "Turquoise Blue": (0, 199, 140),
+    "Salmon": (250, 128, 114),
+    "Powder Blue": (176, 224, 230),
+    "Sky Blue": (135, 206, 235),
+    "Hot Pink": (255, 105, 180),
+    "Deep Pink": (255, 20, 147),
+    "Lime Green": (50, 205, 50),
+    "Slate Gray": (112, 128, 144),
+    "Goldenrod": (218, 165, 32),
+    "Medium Orchid": (186, 85, 211),
+    "Saddle Brown": (139, 69, 19),
 }
+
 
 
 
@@ -113,7 +136,29 @@ inverted_color_map = {
     (222, 155, 144): "Flesh",
     (222, 180, 139): "Beige",
     (135, 89, 61): "Translucent Brown",
+    # Inverted fancy colors
+    (0, 128, 128): "Teal",
+    (255, 0, 255): "Magenta",
+    (255, 215, 0): "Gold",
+    (230, 230, 250): "Lavender",
+    (0, 255, 255): "Aqua",
+    (128, 128, 0): "Olive",
+    (128, 0, 0): "Maroon",
+    (75, 0, 130): "Indigo",
+    (238, 130, 238): "Violet",
+    (0, 199, 140): "Turquoise Blue",
+    (250, 128, 114): "Salmon",
+    (176, 224, 230): "Powder Blue",
+    (135, 206, 235): "Sky Blue",
+    (255, 105, 180): "Hot Pink",
+    (255, 20, 147): "Deep Pink",
+    (50, 205, 50): "Lime Green",
+    (112, 128, 144): "Slate Gray",
+    (218, 165, 32): "Goldenrod",
+    (186, 85, 211): "Medium Orchid",
+    (139, 69, 19): "Saddle Brown",
 }
+
 
 
 
@@ -140,7 +185,7 @@ class ColorSelectionWindow(BoxLayout):
         for color_name, rgb_tuple in color_map.items():
             self.zero_to_one_color_map[color_name] = tuple(val / 255.0 for val in rgb_tuple) + (1.0,)
 
-        grid_layout = GridLayout(cols=10, rows = 6, spacing=10, size_hint_y=0.8)  # Adjust size_hint_y value
+        grid_layout = GridLayout(cols=11, rows = 8, spacing=10, size_hint_y=0.8)  # Adjust size_hint_y value
         self.color_buttons = {}  # Dictionary to store color buttons
 
         for color_name, color_value in self.zero_to_one_color_map.items():

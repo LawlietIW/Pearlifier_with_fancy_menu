@@ -122,103 +122,20 @@ class PixelColorChanger:
         self.selected_pixel_label = tk.Label(self.root, text="Selected Pixel: None")
         self.selected_pixel_label.pack()
 
-        # self.color_map = {
-        #     "White": (236, 237, 237),
-        #     "Cream": (240, 232, 185),
-        #     "Yellow": (240, 185, 1),
-        #     "Orange": (230, 79, 39),
-        #     "Red": (182, 49, 54),
-        #     "Pink": (225, 136, 159),
-        #     "Purple": (105, 74, 130),
-        #     "Dark Blue (Blue)": (44, 70, 144),
-        #     "Light Blue": (48, 92, 176),
-        #     "Green": (37, 104, 71),
-        #     "Light green": (73, 174, 137),
-        #     "Brown": (83, 65, 55),
-        #     "Transparent Red": (192, 36, 53),
-        #     "Transparent Green": (55, 184, 118),
-        #     "Grey": (131, 136, 138),
-        #     "Black": (46, 47, 49),
-        #     "Clear": (216, 210, 206),
-        #     "Reddish Brown": (127, 51, 42),
-        #     "Light Brown": (165, 105, 63),
-        #     "Dark Red": (165, 45, 54),
-        #     "Translucent Purple": (104, 62, 154),
-        #     "Translucent Brown": (135, 89, 61),
-        #     "Flesh": (222, 155, 144),
-        #     "Beige": (222, 180, 139),
-        #     "Army (Dark Green)": (54, 63, 56),
-        #     "Claret": (185, 57, 94),
-        #     "Burgundy": (89, 47, 56),
-        #     "Turquoise": (103, 151, 174),
-        #     "Neon Pink (Fucsia)": (255, 32, 141),
-        #     "Cerise": (255, 57, 86),
-        #     "Neon Yellow": (229, 239, 19),
-        #     "Neon Red": (255, 40, 51),
-        #     "Neon Blue": (35, 83, 176),
-        #     "Neon Green": (6, 183, 60),
-        #     "Neon Orange": (253, 134, 0),
-        #     "Fluorescent Yellow": (241, 242, 28),
-        #     "Fluorescent Orange": (254, 99, 11),
-        #     "Fluorescent Blue": (38, 89, 178),
-        #     "Fluorescent Green": (12, 189, 81),
-        #     "Pastel Yellow": (240, 234, 55),
-        #     "Pastel Red": (238, 105, 114),
-        #     "Pastel Purple": (136, 109, 185),
-        #     "Pastel Blue": (98, 158, 215),
-        #     "Pastel Green": (131, 203, 112),
-        #     "Pastel Pink": (207, 112, 183),
-        #     "Azure": (73, 152, 188),
-        # }
+        self.scrollbar_y = tk.Scrollbar(self.canvas_frame, orient="vertical", command=self.canvas.yview)
+        self.scrollbar_y.pack(side="right", fill="y")
+        self.canvas.configure(yscrollcommand=self.scrollbar_y.set)
 
-        self.inverted_color_map = {
-            (236, 237, 237): "White",
-            (240, 232, 185): "Cream",
-            (240, 185, 1): "Yellow",
-            (230, 79, 39): "Orange",
-            (182, 49, 54): "Red",
-            (225, 136, 159): "Pink",
-            (105, 74, 130): "Purple",
-            (44, 70, 144): "Dark Blue (Blue)",
-            (48, 92, 176): "Light Blue",
-            (37, 104, 71): "Green",
-            (73, 174, 137): "Light green",
-            (83, 65, 55): "Brown",
-            (192, 36, 53): "Transparent Red",
-            (55, 184, 118): "Transparent Green",
-            (131, 136, 138): "Grey",
-            (46, 47, 49): "Black",
-            (216, 210, 206): "Clear",
-            (127, 51, 42): "Reddish Brown",
-            (165, 105, 63): "Light Brown",
-            (165, 45, 54): "Dark Red",
-            (104, 62, 154): "Translucent Purple",
-            (135, 89, 61): "Translucent Brown",
-            (222, 155, 144): "Flesh",
-            (222, 180, 139): "Beige",
-            (54, 63, 56): "Army (Dark Green)",
-            (185, 57, 94): "Claret",
-            (89, 47, 56): "Burgundy",
-            (103, 151, 174): "Turquoise",
-            (255, 32, 141): "Neon Pink (Fucsia)",
-            (255, 57, 86): "Cerise",
-            (229, 239, 19): "Neon Yellow",
-            (255, 40, 51): "Neon Red",
-            (35, 83, 176): "Neon Blue",
-            (6, 183, 60): "Neon Green",
-            (253, 134, 0): "Neon Orange",
-            (241, 242, 28): "Fluorescent Yellow",
-            (254, 99, 11): "Fluorescent Orange",
-            (38, 89, 178): "Fluorescent Blue",
-            (12, 189, 81): "Fluorescent Green",
-            (240, 234, 55): "Pastel Yellow",
-            (238, 105, 114): "Pastel Red",
-            (136, 109, 185): "Pastel Purple",
-            (98, 158, 215): "Pastel Blue",
-            (131, 203, 112): "Pastel Green",
-            (207, 112, 183): "Pastel Pink",
-            (73, 152, 188): "Azure",
-        }
+        self.scrollbar_x = tk.Scrollbar(self.canvas_frame, orient="horizontal", command=self.canvas.xview)
+        self.scrollbar_x.pack(side="bottom", fill="x")
+        self.canvas.configure(xscrollcommand=self.scrollbar_x.set)
+
+        # Bind arrow keys to scroll
+        self.root.bind("<Up>", lambda event: self.canvas.yview_scroll(-1, "units"))
+        self.root.bind("<Down>", lambda event: self.canvas.yview_scroll(1, "units"))
+        self.root.bind("<Left>", lambda event: self.canvas.xview_scroll(-1, "units"))
+        self.root.bind("<Right>", lambda event: self.canvas.xview_scroll(1, "units"))
+
         self.color_menu_frame = tk.Frame(self.root)
         self.color_menu_frame.pack(side=tk.RIGHT, fill=tk.Y)
 
@@ -247,17 +164,35 @@ class PixelColorChanger:
         file_path = filedialog.askopenfilename(filetypes=[("PNG files", "*.png")])
         if file_path:
             self.image_path = file_path
-            self.load_image()
+            self.load_image(file_path)
 
-    def load_image(self):
+    def load_image(self, file_path):
+        # file_path = filedialog.askopenfilename(filetypes=[("PNG files", "*.png")])
+        if file_path:
+            self.image_path = file_path
+            self.load_image_from_path()
+
+    def load_image_from_path(self):
         self.image = Image.open(self.image_path)
         self.image = self.image.resize((self.image.width * 3, self.image.height * 3), Image.NEAREST)
         self.tk_image = ImageTk.PhotoImage(self.image)
-        self.canvas.config(width=self.image.width, height=self.image.height)
+
+        # Update canvas size
+        self.canvas.config(scrollregion=(0, 0, self.image.width, self.image.height),
+                           width=min(800, self.image.width),
+                           height=min(600, self.image.height))
+
         self.canvas.create_image(0, 0, anchor=tk.NW, image=self.tk_image)
 
+        # Update color bar placement
+        self.color_menu_frame.pack(side=tk.RIGHT, fill=tk.Y)
+        self.color_menu.pack()
+
+        for i, color in enumerate(color_map):
+            self.color_menu.itemconfig(i, {'bg': f'#{self.rgb_to_hex(color_map[color])}'})
+
     def on_click(self, event):
-        x, y = event.x, event.y
+        x, y = self.canvas.canvasx(event.x), self.canvas.canvasy(event.y)
         pixel_color = self.image.getpixel((x, y))
         self.selected_pixel_label.config(text=f"Selected Pixel: ({x}, {y}) - {pixel_color}")
 
@@ -277,6 +212,11 @@ class PixelColorChanger:
             self.canvas.delete("all")
             self.canvas.create_image(0, 0, anchor=tk.NW, image=self.tk_image)
 
+    def scroll_canvas(self, event, dx, dy):
+        self.canvas.xview_scroll(dx, "units")
+        self.canvas.yview_scroll(dy, "units")
+        self.on_click(event)  # Reapply color change after scrolling
+
 
     def replace_color_around_position(self, pixels, x, y, selected_color):
         # print("sel", selected_color)
@@ -286,8 +226,8 @@ class PixelColorChanger:
         if target_color == color_map[selected_color]:
             return # Don't replace the same color
         stack = [(x, y)]
-        print("target_color", target_color)
-        print("selected_color", selected_color)
+        # print("target_color", target_color)
+        # print("selected_color", selected_color)
 
         while stack:
             current_x, current_y = stack.pop()
@@ -315,7 +255,7 @@ class PixelColorChanger:
             pixels = self.image.load()
 
             # Restore the previous color
-            selected_color = self.inverted_color_map[prev_color]
+            selected_color = inverted_color_map[prev_color]
             self.replace_color_around_position(pixels, x, y, selected_color)
 
             self.tk_image = ImageTk.PhotoImage(self.image)
