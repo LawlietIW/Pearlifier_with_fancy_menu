@@ -1,12 +1,10 @@
 # Pearlifier
 Run the fancy_menu.py to start
 
-pip install kivy
-pip install pillow
+`pip install kivy`
 
-or
+`pip install pillow`
 
-conda env create -f environment.yml
 
 Then pick a file, choose the colours, pick width height and grid. If 1 or 0 you get no grid. Else you get a grid with thick line as often as you say. Then pearlify!!!!!!!
 
