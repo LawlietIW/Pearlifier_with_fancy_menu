@@ -9,8 +9,6 @@ Run the fancy_menu.py to start
 Then pick a file, choose the colours, pick width height and grid. If 1 or 0 you get no grid. Else you get a grid with thick line as often as you say. Then pearlify!!!!!!!
 
 
-# To make the app
-py -m PyInstaller fancy_menu.py
 
 ## Features
 ### Choose Image:
